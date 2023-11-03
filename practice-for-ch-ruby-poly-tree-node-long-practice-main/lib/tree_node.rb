@@ -50,13 +50,13 @@ class PolyTreeNode
     def bfs(target)
       new_queue = []
       new_queue << self
-      debugger
+      # debugger
 
       while new_queue.length > 0
         if new_queue[0].value == target
-          new_queue[0]
+          return new_queue[0]
         else
-          new_queue + new_queue[0].children if !new_queue[0].children.nil?
+          new_queue += new_queue[0].children if !new_queue[0].children.nil?
           new_queue.shift
         end
       end
