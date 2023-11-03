@@ -1,3 +1,5 @@
+require "byebug"
+
 class PolyTreeNode
     # testing
 
@@ -21,19 +23,31 @@ class PolyTreeNode
       end
     end 
 
-    def add_child(node)
-        @children << node
-        #itself => node
-        # parent of node = node
+    def add_child(new_child)
+        new_child.parent = self
     end
 
     def remove_child(node)
-
       if !self.children.include?(node)
         raise "error"
       else
         node.parent = nil
       end
+    end
+
+    def dfs(target)
+        return self if self.value == target
+        
+        self.children.each do |child|
+            result = child.dfs(target)
+            if result != nil
+                return result
+            end
+        end
+        return nil
+    end
+
+    def bfs
 
     end
 end
