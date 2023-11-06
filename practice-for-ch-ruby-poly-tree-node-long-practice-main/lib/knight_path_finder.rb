@@ -19,7 +19,7 @@ class KnightPathFinder
 
     # x 0 to 7
     # y 0 to 7
-    attr_accessor :pos, :considered_positions
+    attr_accessor :pos, :considered_positions, :root_node
     def initialize(pos)
         @pos = pos
         @root_node = PolyTreeNode.new(pos)
@@ -31,8 +31,21 @@ class KnightPathFinder
 
     end
 
-    def build_move_tree(root_node)
-
+    def build_move_tree(starting_node)
+        nodes = [starting_node]
+        p nodes 
+        p starting_node.value
+        while !nodes.empty? 
+            new_positions = new_move_positions(nodes[0].value)
+            p new_positions
+            new_positions.each do |pos|
+                node = PolyTreeNode.new(pos)
+                starting_node.add_child(node)
+                nodes << node
+            end
+            nodes.shift
+        end
+        starting_node
     end
 
     def new_move_positions(pos)
@@ -51,8 +64,9 @@ p "==="
 # p KnightPathFinder.valid_moves([4, 4])
 k = KnightPathFinder.new([0, 0])
 k.new_move_positions([0, 0])
-p k.pos
-p k.considered_positions
+# p k.pos
+# p k.considered_positions
+p k.build_move_tree(k.root_node)
 # k.considered_positions[0][0] = 1
 # p k.pos
 # p k.considered_positions
