@@ -33,11 +33,8 @@ class KnightPathFinder
 
     def build_move_tree(starting_node)
         nodes = [starting_node]
-        p nodes 
-        p starting_node.value
         while !nodes.empty? 
             new_positions = new_move_positions(nodes[0].value)
-            p new_positions
             new_positions.each do |pos|
                 node = PolyTreeNode.new(pos)
                 starting_node.add_child(node)
@@ -63,7 +60,7 @@ p "==="
 # p KnightPathFinder.valid_moves([0, 0])
 # p KnightPathFinder.valid_moves([4, 4])
 k = KnightPathFinder.new([0, 0])
-k.new_move_positions([0, 0])
+# k.new_move_positions([0, 0])
 # p k.pos
 # p k.considered_positions
 p k.build_move_tree(k.root_node)
